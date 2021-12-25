@@ -1,7 +1,6 @@
 
-import Pagamento from "../../Models/Pagamento";
+import Pagamento from '../../Models/Pagamento';
 
-import Env from '@ioc:Adonis/Core/Env'
 
 export default class PagamentosController {
   public async index({ response }) {
@@ -9,7 +8,8 @@ export default class PagamentosController {
     response.status(200).json(pagamento);
   }
 
-  public async pay({ response }) {
-
+  public async store ({response, request}) {
+    const pagamento = await Pagamento.create(request.only(['mes','ano','multa','status','valor']));
+    response.status(200).json(pagamento);
   }
 }
